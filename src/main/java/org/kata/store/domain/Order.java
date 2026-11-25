@@ -43,5 +43,10 @@ public class Order {
 		return price;
 	}
 
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

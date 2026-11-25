@@ -1,6 +1,8 @@
 package test.java.org.kata.store.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -37,6 +39,21 @@ class OrderTest {
 
         // Assert
         assertEquals(OrderStatus.DRAFT, order.getStatus());
+    }
+	
+	@Test
+    void shouldMoveFromDraftToProcessed() {
+		/// Arrange
+		String orderId = "ORD-1";
+        String userId = "USR-1";
+        double price = 25.50;
+
+        // Act
+        Order order = new Order(orderId, userId, price);
+        order.move();
+        
+        // Assert
+        assertEquals(OrderStatus.PROCESSED, order.getStatus());
     }
 	
 	
