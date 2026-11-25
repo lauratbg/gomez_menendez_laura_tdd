@@ -44,7 +44,7 @@ public class Order {
 	}
 
 	public void move() {
-		// TODO Auto-generated method stub
+		status = OrderStatus.PROCESSED;
 		
 	}
 
