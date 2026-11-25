@@ -14,4 +14,15 @@ package main.java.org.kata.store.domain;
  * Un @ParameterizedTest te ahorra repetir tests casi iguales.
  */
 public class Order {
+
+	public Order(String orderId, String userId, double price) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public OrderStatus getStatus() {
+		// TODO Auto-generated method stub
+		return OrderStatus.DELIVERED;
+	}
+
+	
 }

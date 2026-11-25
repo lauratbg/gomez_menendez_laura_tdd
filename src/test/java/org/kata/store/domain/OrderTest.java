@@ -1,5 +1,12 @@
 package test.java.org.kata.store.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+
+import main.java.org.kata.store.domain.Order;
+import main.java.org.kata.store.domain.OrderStatus;
+
 /*
  * TODO: Tests unitarios de Order y de su flujo de estados.
  *
@@ -17,4 +24,20 @@ package test.java.org.kata.store.domain;
  *   - Haz un commit en rojo, otro en verde y otro tras refactorizar.
  */
 class OrderTest {
+	
+	@Test
+    void shouldStartInDraftStatus() {
+		// Arrange
+		String orderId = "ORD-1";
+        String userId = "USR-1";
+        double price = 25.50;
+
+        // Act
+        Order order = new Order(orderId, userId, price);
+
+        // Assert
+        assertEquals(OrderStatus.DRAFT, order.getStatus());
+    }
+	
+	
 }
