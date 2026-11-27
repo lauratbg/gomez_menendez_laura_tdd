@@ -1,5 +1,8 @@
 package org.kata.store.service;
 
+import org.kata.store.domain.User;
+import org.kata.store.repository.UserRepository;
+
 /*
  * TODO: Alta de usuarios.
  *
@@ -10,4 +13,13 @@ package org.kata.store.service;
  * Pista: recibe el UserRepository por constructor. Así, en el test, puedes pasarle un mock.
  */
 public class UserService {
+
+    public UserService(UserRepository userRepository) {
+        //TODO Auto-generated constructor stub
+    }
+
+    public User registerUser(String id, String name, String surname) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registerUser'");
+    }
 }

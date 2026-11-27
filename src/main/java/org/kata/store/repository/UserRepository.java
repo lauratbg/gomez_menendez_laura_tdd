@@ -1,5 +1,7 @@
 package org.kata.store.repository;
 
+import org.kata.store.domain.User;
+
 /*
  * TODO: Almacén de usuarios.
  *
@@ -11,4 +13,8 @@ package org.kata.store.repository;
  * o, como extra, una con PostgreSQL probada con Testcontainers.
  */
 public interface UserRepository {
+
+    Object existsById(String id);
+
+    void save(User createdUser);
 }
