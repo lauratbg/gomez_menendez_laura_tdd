@@ -1,4 +1,4 @@
-package test.java.org.kata.store.domain;
+package org.kata.store.domain;
 
 /*
  * TODO: Tests unitarios de User.

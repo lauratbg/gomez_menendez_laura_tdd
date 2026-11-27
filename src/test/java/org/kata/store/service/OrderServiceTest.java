@@ -1,4 +1,4 @@
-package test.java.org.kata.store.service;
+package org.kata.store.service;
 
 /*
  * TODO: Tests unitarios de OrderService con Mockito.

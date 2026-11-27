@@ -1,4 +1,4 @@
-package main.java.org.kata.store.domain;
+package org.kata.store.domain;
 
 /*
  * TODO: Usuario de la tienda.

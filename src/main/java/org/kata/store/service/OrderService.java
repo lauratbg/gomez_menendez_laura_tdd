@@ -1,4 +1,4 @@
-package main.java.org.kata.store.service;
+package org.kata.store.service;
 
 /*
  * TODO: Registro de pedidos.

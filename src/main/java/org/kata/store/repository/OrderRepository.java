@@ -1,4 +1,4 @@
-package main.java.org.kata.store.repository;
+package org.kata.store.repository;
 
 /*
  * TODO: Almacén de pedidos.

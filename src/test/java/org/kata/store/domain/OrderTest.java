@@ -1,4 +1,4 @@
-package test.java.org.kata.store.domain;
+package org.kata.store.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 
-import main.java.org.kata.store.domain.Order;
-import main.java.org.kata.store.domain.OrderStatus;
+import org.kata.store.domain.Order;
+import org.kata.store.domain.OrderStatus;
 
 /*
  * TODO: Tests unitarios de Order y de su flujo de estados.

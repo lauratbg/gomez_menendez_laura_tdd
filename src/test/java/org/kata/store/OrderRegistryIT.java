@@ -1,4 +1,4 @@
-package test.java.org.kata.store;
+package org.kata.store;
 
 /*
  * TODO: Prueba de integración (repositorio en memoria obligatorio, TestContainers opcional).
