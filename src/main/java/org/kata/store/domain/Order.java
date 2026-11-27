@@ -25,6 +25,9 @@ public class Order {
 		this.userId = userId;
 		this.price = price;
 		this.status = OrderStatus.DRAFT;
+
+		if(price<=0)
+			throw new IllegalArgumentException("Order price must be greater than zero");
 	}
 
 	public OrderStatus getStatus() {
