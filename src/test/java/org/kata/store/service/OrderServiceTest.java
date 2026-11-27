@@ -2,6 +2,7 @@ package org.kata.store.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -67,5 +68,22 @@ class OrderServiceTest {
         assertEquals(price, order.getPrice());
         assertEquals(OrderStatus.DRAFT, order.getStatus());
         verify(orderRepository).save(order);
+    }
+
+    @Test
+    void shouldRejectOrderForUnknownUser() {
+        // Arrange
+        String orderId = "ORD-1";
+        String unknownUserId = "noname";
+        double price = 25.2;
+        when(userRepository.existsById(unknownUserId)).thenReturn(false);
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> orderService.createOrder(orderId, unknownUserId, price)
+        );
+        assertNotNull(exception.getMessage());
+        assertEquals("User does not exist: ", exception.getMessage());
     }
 }
