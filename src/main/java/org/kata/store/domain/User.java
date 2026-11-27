@@ -15,8 +15,8 @@ public class User {
 	private final String id;
 
 	public User(String id, String name, String surname) {
-        if(name.isEmpty() || name.isBlank()){
-			throw new IllegalArgumentException("The name must not be empty");
+        if(name == null || name.isEmpty() || name.isBlank()){
+			throw new IllegalArgumentException("The name must not be empty or null");
 		}
         if(surname == null || surname.isEmpty() || surname.isBlank()){
 			throw new IllegalArgumentException("The surname must not be empty or null");
