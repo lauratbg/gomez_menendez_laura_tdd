@@ -51,6 +51,9 @@ public class Order {
 		if(status.equals(OrderStatus.DRAFT)){
 			 order.setStatus(OrderStatus.PROCESSED);
 		}
+		if(status.equals(OrderStatus.PROCESSED)){
+			 order.setStatus(OrderStatus.DISPATCHED);
+		}
 		if(status.equals(OrderStatus.DELIVERED)){
 			order.setStatus(OrderStatus.DELIVERED);
 		}
