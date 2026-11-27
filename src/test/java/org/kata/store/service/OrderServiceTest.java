@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -155,5 +156,27 @@ class OrderServiceTest {
                 () -> orderService.advance(orderId)
         );
         verify(orderRepository, never()).save(any());
+    }
+
+    @Test
+    void shouldAdvanceOrderFromDraftToDelivered() {
+        // Arrange
+        String orderId = "ORD-1";
+        Order order = new Order(orderId, "87596258P", 25.2);
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+
+        // Act & Assert
+        assertEquals(OrderStatus.DRAFT, order.getStatus());
+
+        Order afterFirstAdvance = orderService.advance(orderId);
+        assertEquals(OrderStatus.PROCESSED, afterFirstAdvance.getStatus());
+
+        Order afterSecondAdvance = orderService.advance(orderId);
+        assertEquals(OrderStatus.DISPATCHED, afterSecondAdvance.getStatus());
+
+        Order afterThirdAdvance = orderService.advance(orderId);
+        assertEquals(OrderStatus.DELIVERED, afterThirdAdvance.getStatus());
+
+        verify(orderRepository, times(3)).save(order);
     }
 }
