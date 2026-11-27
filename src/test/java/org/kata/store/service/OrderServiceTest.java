@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.kata.store.domain.Order;
 import org.kata.store.domain.OrderStatus;
@@ -139,4 +140,24 @@ class OrderServiceTest {
         assertEquals(OrderStatus.PROCESSED, updatedOrder.getStatus());
         verify(orderRepository).save(updatedOrder);
     }
+
+    @ParameterizedTest
+    @EnumSource(
+            value = OrderStatus.class,
+            names = {"PROCESSED", "DISPATCHED", "DELIVERED"}
+    )
+    void shouldRejectInvalidStatusTransition(OrderStatus currentStatus) {
+        // Arrange
+        String orderId = "ORD-1";
+        Order order = new Order(orderId,  "87596258P", 25.2);
+        order.setStatus(currentStatus);
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+
+        // Act & Assert
+        assertThrows(
+                IllegalStateException.class,
+                () -> orderService.advance(orderId)
+        );
+        verify(orderRepository, never()).save(any());
+}
 }
