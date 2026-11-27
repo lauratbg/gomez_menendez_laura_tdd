@@ -10,4 +10,28 @@ package org.kata.store.domain;
  *   - Si no se cumple, se lanza una excepción con un mensaje claro.
  */
 public class User {
+    private final String name;
+	private final String surname;
+	private final String id;
+
+	public User(String id, String name, String surname) {
+		this.name = "";
+        this.surname = "";
+        this.id = "";
+		
+	}
+
+    public String getName() {
+       return this.name;
+    }
+
+    public String getSurname() {
+       return this.surname;
+    }
+
+    public String getId() {
+       return this.id;
+    }
+
+
 }
