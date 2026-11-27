@@ -21,13 +21,14 @@ public class Order {
 	private OrderStatus status;
 
 	public Order(String orderId, String userId, double price) {
+		if(price<=0){
+			throw new IllegalArgumentException("Order price must be greater than zero");
+		}
+
 		this.orderId = orderId;
 		this.userId = userId;
 		this.price = price;
 		this.status = OrderStatus.DRAFT;
-
-		if(price<=0)
-			throw new IllegalArgumentException("Order price must be greater than zero");
 	}
 
 	public OrderStatus getStatus() {
@@ -51,15 +52,15 @@ public class Order {
 	}
 
 	public void move(Order order) {
-    if (order == null) {
-        throw new IllegalArgumentException("Order must not be null");
-    }
-    OrderStatus currentStatus = order.getStatus();
-    if (currentStatus == null) {
-        throw new IllegalStateException("Order status must not be null");
-    }
-    order.setStatus(currentStatus.next());
-}
+   		if (order == null) {
+        	throw new IllegalArgumentException("Order must not be null");
+    	}
+    	OrderStatus currentStatus = order.getStatus();
+    	if (currentStatus == null) {
+        	throw new IllegalStateException("Order status must not be null");
+    	}
+    	order.setStatus(currentStatus.next());
+	}
 
 	
 }
