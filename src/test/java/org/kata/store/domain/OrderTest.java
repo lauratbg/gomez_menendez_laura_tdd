@@ -50,7 +50,7 @@ class OrderTest {
 
         // Act
         Order order = new Order(orderId, userId, price);
-        order.move();
+        order.move(order);
         
         // Assert
         assertEquals(OrderStatus.PROCESSED, order.getStatus());

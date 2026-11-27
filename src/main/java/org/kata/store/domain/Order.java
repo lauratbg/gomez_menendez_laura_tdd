@@ -31,6 +31,10 @@ public class Order {
 		return status;
 	}
 
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+
 	public String getOrderId() {
 		return orderId;
 	}
@@ -43,9 +47,10 @@ public class Order {
 		return price;
 	}
 
-	public void move() {
-		status = OrderStatus.PROCESSED;
-		
+	public void move(Order order) {
+		if(status.equals(OrderStatus.DRAFT)){
+			 order.setStatus(OrderStatus.PROCESSED);
+		}
 	}
 
 	
