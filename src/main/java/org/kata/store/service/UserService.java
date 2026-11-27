@@ -30,6 +30,7 @@ public class UserService {
 
         User user = new User(id, name, surname);
         userRepository.save(user);
+        
         return user;
     }
 }
