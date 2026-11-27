@@ -1,5 +1,7 @@
 package org.kata.store.service;
 
+import org.kata.store.domain.Order;
+
 /*
  * TODO: Registro de pedidos.
  *
@@ -15,4 +17,9 @@ package org.kata.store.service;
  *   - Mock: verify(orderRepository).save(...) para comprobar que el pedido se guarda.
  */
 public class OrderService {
+
+    public Order createOrder(String orderId, String userId, double price) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createOrder'");
+    }
 }

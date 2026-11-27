@@ -1,5 +1,7 @@
 package org.kata.store.repository;
 
+import org.kata.store.domain.Order;
+
 /*
  * TODO: Almacén de pedidos.
  *
@@ -9,4 +11,6 @@ package org.kata.store.repository;
  * y con never() que NO lo guarda cuando la validación falla.
  */
 public interface OrderRepository {
+
+    void save(Order order);
 }
