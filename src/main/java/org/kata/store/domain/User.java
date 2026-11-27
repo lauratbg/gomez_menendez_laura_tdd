@@ -21,11 +21,8 @@ public class User {
         if(surname.isEmpty() || surname.isBlank()){
 			throw new IllegalArgumentException("The surname must not be empty");
 		}
-        if(id == null){
-			throw new IllegalArgumentException("The id must not be null");
-		}
-        if(id.isEmpty() || id.isBlank()){
-			throw new IllegalArgumentException("The id must not be empty");
+        if(id == null || id.isEmpty() || id.isBlank()){
+			throw new IllegalArgumentException("The id must not be empty or null");
 		}
         
 		this.name = name;

@@ -83,7 +83,7 @@ class UserTest {
                 () -> new User(id, name, surname)
         );
         assertNotNull(exception.getMessage());
-        assertEquals("The id must not be empty", exception.getMessage());
+        assertEquals("The id must not be empty or null", exception.getMessage());
     }
 
     @Test
@@ -99,6 +99,6 @@ class UserTest {
                 () -> new User(id, name, surname)
         );
         assertNotNull(exception.getMessage());
-        assertEquals("The id must not be null", exception.getMessage());
+        assertEquals("The id must not be empty or null", exception.getMessage());
     }
 }
