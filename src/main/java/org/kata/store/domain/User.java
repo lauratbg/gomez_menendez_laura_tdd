@@ -15,10 +15,9 @@ public class User {
 	private final String id;
 
 	public User(String id, String name, String surname) {
-		this.name = "";
-        this.surname = "";
-        this.id = "";
-		
+		this.name = name;
+		this.surname = surname;
+		this.id = id;
 	}
 
     public String getName() {
