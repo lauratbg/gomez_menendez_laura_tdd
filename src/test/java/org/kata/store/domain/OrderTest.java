@@ -2,10 +2,13 @@ package org.kata.store.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.kata.store.domain.Order;
 import org.kata.store.domain.OrderStatus;
 
@@ -104,5 +107,21 @@ class OrderTest {
         assertEquals(OrderStatus.DELIVERED, order.getStatus());
     }
 	
+    @ParameterizedTest(name = "price={0} should throw exception")
+    @ValueSource(doubles = {0.0, -0.01, -1.0, -50.0})
+    void shouldRejectPriceLowerOrEqualThanZero(double invalidPrice) {
+        // Arrange
+        String orderId = "ORD-1";
+        String userId = "USR-1";
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Order(orderId, userId, invalidPrice)
+        );
+        assertNotNull(exception.getMessage());
+        assertEquals("Order price must be greater than zero", exception.getMessage());
+    }
+
 	
 }
