@@ -1,6 +1,10 @@
 package org.kata.store.service;
 
+import java.util.Objects;
+
 import org.kata.store.domain.Order;
+import org.kata.store.repository.OrderRepository;
+import org.kata.store.repository.UserRepository;
 
 /*
  * TODO: Registro de pedidos.
@@ -18,8 +22,18 @@ import org.kata.store.domain.Order;
  */
 public class OrderService {
 
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+
+
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+    }
+
     public Order createOrder(String orderId, String userId, double price) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createOrder'");
+       Order order = new Order(orderId, userId, price);
+       orderRepository.save(order);
+       return order;
     }
 }

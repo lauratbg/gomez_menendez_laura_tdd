@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kata.store.domain.Order;
@@ -43,6 +44,10 @@ class OrderServiceTest {
 
     private OrderService orderService;
 
+    @BeforeEach
+    void setUp() {
+        orderService = new OrderService(orderRepository,userRepository);
+    }
 
     @Test
     void shouldCreateOrderInDraftForExistingUser() {
@@ -50,7 +55,6 @@ class OrderServiceTest {
         String orderId = "ORD-1";
         String userId = "87596258P";
         double price = 25.2;
-        when(userRepository.existsById(userId)).thenReturn(true);
 
         // Act
         Order order = orderService.createOrder(orderId, userId, price);
