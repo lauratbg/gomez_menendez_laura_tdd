@@ -1,8 +1,8 @@
 package org.kata.store.domain;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +33,23 @@ class UserTest {
         assertEquals(id, user.getId());
         assertEquals(name, user.getName());
         assertEquals(surname, user.getSurname());
+
+    }
+
+    @Test
+    void shouldRejectEmptyName() {
+		// Arrange
+		String name = "";
+        String surname = "Apellido";
+        String id = "58799654Y";
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new User(id, name, surname)
+        );
+        assertNotNull(exception.getMessage());
+        assertEquals("The name must not be empty", exception.getMessage());
 
     }
 }
