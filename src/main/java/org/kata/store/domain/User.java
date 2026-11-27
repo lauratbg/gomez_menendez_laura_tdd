@@ -18,8 +18,8 @@ public class User {
         if(name.isEmpty() || name.isBlank()){
 			throw new IllegalArgumentException("The name must not be empty");
 		}
-        if(surname.isEmpty() || surname.isBlank()){
-			throw new IllegalArgumentException("The surname must not be empty");
+        if(surname == null || surname.isEmpty() || surname.isBlank()){
+			throw new IllegalArgumentException("The surname must not be empty or null");
 		}
         if(id == null || id.isEmpty() || id.isBlank()){
 			throw new IllegalArgumentException("The id must not be empty or null");

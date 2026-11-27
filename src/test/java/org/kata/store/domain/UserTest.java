@@ -66,7 +66,24 @@ class UserTest {
                 () -> new User(id, name, surname)
         );
         assertNotNull(exception.getMessage());
-        assertEquals("The surname must not be empty", exception.getMessage());
+        assertEquals("The surname must not be empty or null", exception.getMessage());
+
+    }
+
+     @Test
+    void shouldRejectNullSurname() {
+		// Arrange
+		String name = "Nombre";
+        String surname = null;
+        String id = "58799654Y";
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new User(id, name, surname)
+        );
+        assertNotNull(exception.getMessage());
+        assertEquals("The surname must not be empty or null", exception.getMessage());
 
     }
 
