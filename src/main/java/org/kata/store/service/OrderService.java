@@ -1,6 +1,5 @@
 package org.kata.store.service;
 
-import java.util.Objects;
 
 import org.kata.store.domain.Order;
 import org.kata.store.repository.OrderRepository;
