@@ -89,20 +89,21 @@ class OrderTest {
     }
 
     @Test
-    void shouldNotChangeStatusWhenDelivered() {
-		// Arrange
-		String orderId = "ORD-1";
+    void shouldThrowExceptionWhenAdvancingDeliveredOrder() {
+        // Arrange
+        String orderId = "ORD-1";
         String userId = "USR-1";
         double price = 25.50;
-
-        // Act
         Order order = new Order(orderId, userId, price);
         order.setStatus(OrderStatus.DELIVERED);
-        order.move(order);
-        
-        // Assert
+
+        // Act & Assert
+        assertThrows(
+                IllegalStateException.class,
+                () -> order.move(order)
+        );
         assertEquals(OrderStatus.DELIVERED, order.getStatus());
-    }
+}
 	
     @ParameterizedTest(name = "price={0} should throw exception")
     @ValueSource(doubles = {0.0, -0.01, -1.0, -50.0})
