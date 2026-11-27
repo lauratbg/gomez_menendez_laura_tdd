@@ -55,6 +55,21 @@ class OrderTest {
         // Assert
         assertEquals(OrderStatus.PROCESSED, order.getStatus());
     }
+
+    @Test
+    void shouldNotSkipFromDraftToDispatched() {
+		/// Arrange
+		String orderId = "ORD-1";
+        String userId = "USR-1";
+        double price = 25.50;
+
+        // Act
+        Order order = new Order(orderId, userId, price);
+        order.move(order);
+        
+        // Assert
+        assertNotEquals(OrderStatus.DISPATCHED, order.getStatus());
+    }
 	
 	
 }
