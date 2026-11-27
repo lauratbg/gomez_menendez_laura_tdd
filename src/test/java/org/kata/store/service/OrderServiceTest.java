@@ -84,6 +84,6 @@ class OrderServiceTest {
                 () -> orderService.createOrder(orderId, unknownUserId, price)
         );
         assertNotNull(exception.getMessage());
-        assertEquals("User does not exist: ", exception.getMessage());
+        assertEquals("User does not exist: " + unknownUserId, exception.getMessage());
     }
 }
