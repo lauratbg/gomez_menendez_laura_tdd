@@ -32,8 +32,11 @@ public class OrderService {
     }
 
     public Order createOrder(String orderId, String userId, double price) {
-       Order order = new Order(orderId, userId, price);
-       orderRepository.save(order);
-       return order;
+        if (!userRepository.existsById(userId)) {
+            throw new IllegalArgumentException("User does not exist: " + userId);
+        }
+        Order order = new Order(orderId, userId, price);
+        orderRepository.save(order);
+        return order;
     }
 }
