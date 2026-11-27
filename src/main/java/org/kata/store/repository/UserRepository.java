@@ -14,7 +14,7 @@ import org.kata.store.domain.User;
  */
 public interface UserRepository {
 
-    Object existsById(String id);
+    boolean existsById(String id);
 
-    void save(User createdUser);
+    void save(User user);
 }

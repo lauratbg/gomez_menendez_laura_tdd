@@ -14,12 +14,22 @@ import org.kata.store.repository.UserRepository;
  */
 public class UserService {
 
+    private final UserRepository userRepository;
+
     public UserService(UserRepository userRepository) {
-        //TODO Auto-generated constructor stub
+        if (userRepository == null) {
+            throw new IllegalArgumentException("UserRepository must not be null");
+        }
+        this.userRepository = userRepository;
     }
 
     public User registerUser(String id, String name, String surname) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'registerUser'");
+        if (userRepository.existsById(id)) {
+            throw new IllegalArgumentException("User already exists with id: " + id);
+        }
+
+        User user = new User(id, name, surname);
+        userRepository.save(user);
+        return user;
     }
 }
