@@ -55,6 +55,7 @@ class OrderServiceTest {
         String orderId = "ORD-1";
         String userId = "87596258P";
         double price = 25.2;
+        when(userRepository.existsById(userId)).thenReturn(true);
 
         // Act
         Order order = orderService.createOrder(orderId, userId, price);
