@@ -39,4 +39,9 @@ public class OrderService {
         orderRepository.save(order);
         return order;
     }
+
+    public Order advance(String orderId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'advanceOrderStatus'");
+    }
 }

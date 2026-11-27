@@ -8,6 +8,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -123,4 +125,18 @@ class OrderServiceTest {
         verify(orderRepository, never()).save(any());
     }
 
+    @Test
+    void shouldAdvanceOrderToNextStatus() {
+        // Arrange
+        String orderId = "ORD-1";
+        Order order = new Order(orderId, "87596258P", 25.2);
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+
+        // Act
+        Order updatedOrder = orderService.advance(orderId);
+
+        // Assert
+        assertEquals(OrderStatus.PROCESSED, updatedOrder.getStatus());
+        verify(orderRepository).save(updatedOrder);
+    }
 }
