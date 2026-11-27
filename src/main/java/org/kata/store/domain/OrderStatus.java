@@ -24,7 +24,7 @@ public enum OrderStatus {
             case DRAFT -> PROCESSED;
             case PROCESSED -> DISPATCHED;
             case DISPATCHED -> DELIVERED;
-            case DELIVERED -> DELIVERED;
+            case DELIVERED -> throw new IllegalStateException("Order is already DELIVERED");        
         };
     }
 }

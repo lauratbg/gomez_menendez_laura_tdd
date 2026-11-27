@@ -141,16 +141,12 @@ class OrderServiceTest {
         verify(orderRepository).save(updatedOrder);
     }
 
-    @ParameterizedTest
-    @EnumSource(
-            value = OrderStatus.class,
-            names = {"PROCESSED", "DISPATCHED", "DELIVERED"}
-    )
-    void shouldRejectInvalidStatusTransition(OrderStatus currentStatus) {
+    @Test
+    void shouldRejectInvalidStatusTransition() {
         // Arrange
         String orderId = "ORD-1";
-        Order order = new Order(orderId,  "87596258P", 25.2);
-        order.setStatus(currentStatus);
+        Order order = new Order(orderId, "87596258P", 25.2);
+        order.setStatus(OrderStatus.DELIVERED);
         when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
 
         // Act & Assert
@@ -159,5 +155,5 @@ class OrderServiceTest {
                 () -> orderService.advance(orderId)
         );
         verify(orderRepository, never()).save(any());
-}
+    }
 }
