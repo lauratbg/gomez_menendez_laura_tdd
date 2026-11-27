@@ -48,19 +48,15 @@ public class Order {
 	}
 
 	public void move(Order order) {
-		if(status.equals(OrderStatus.DRAFT)){
-			 order.setStatus(OrderStatus.PROCESSED);
-		}
-		if(status.equals(OrderStatus.PROCESSED)){
-			 order.setStatus(OrderStatus.DISPATCHED);
-		}
-		if(status.equals(OrderStatus.DISPATCHED)){
-			 order.setStatus(OrderStatus.DELIVERED);
-		}
-		if(status.equals(OrderStatus.DELIVERED)){
-			order.setStatus(OrderStatus.DELIVERED);
-		}
-	}
+    if (order == null) {
+        throw new IllegalArgumentException("Order must not be null");
+    }
+    OrderStatus currentStatus = order.getStatus();
+    if (currentStatus == null) {
+        throw new IllegalStateException("Order status must not be null");
+    }
+    order.setStatus(currentStatus.next());
+}
 
 	
 }

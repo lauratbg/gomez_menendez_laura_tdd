@@ -17,5 +17,14 @@ public enum OrderStatus {
     DRAFT,
     PROCESSED,
     DISPATCHED,
-    DELIVERED
+    DELIVERED;
+
+    public OrderStatus next() {
+        return switch (this) {
+            case DRAFT -> PROCESSED;
+            case PROCESSED -> DISPATCHED;
+            case DISPATCHED -> DELIVERED;
+            case DELIVERED -> DELIVERED;
+        };
+    }
 }
