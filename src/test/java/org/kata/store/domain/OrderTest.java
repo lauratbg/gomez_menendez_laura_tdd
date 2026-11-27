@@ -43,7 +43,7 @@ class OrderTest {
 	
 	@Test
     void shouldMoveFromDraftToProcessed() {
-		/// Arrange
+		// Arrange
 		String orderId = "ORD-1";
         String userId = "USR-1";
         double price = 25.50;
@@ -57,18 +57,19 @@ class OrderTest {
     }
 
     @Test
-    void shouldNotSkipFromDraftToDispatched() {
-		/// Arrange
+    void shouldNotChangeStatusWhenDelivered() {
+		// Arrange
 		String orderId = "ORD-1";
         String userId = "USR-1";
         double price = 25.50;
 
         // Act
         Order order = new Order(orderId, userId, price);
+        order.setStatus(OrderStatus.DELIVERED);
         order.move(order);
         
         // Assert
-        assertNotEquals(OrderStatus.DISPATCHED, order.getStatus());
+        assertEquals(OrderStatus.DELIVERED, order.getStatus());
     }
 	
 	
