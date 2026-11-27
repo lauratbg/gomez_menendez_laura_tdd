@@ -2,6 +2,7 @@ package org.kata.store.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,5 +57,22 @@ class UserServiceTest {
         assertEquals(name, user.getName());
         assertEquals(surname, user.getSurname());
         verify(userRepository).save(user);
+    }
+
+    @Test
+    void shouldRejectUserWithDuplicatedId() {
+        // Arrange
+        String duplicatedId = "87596258P";
+        String name = "Nombre";
+        String surname = "Apellido";
+        when(userRepository.existsById(duplicatedId)).thenReturn(true);
+
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.registerUser(duplicatedId, name, surname)
+        );
+        assertNotNull(exception.getMessage());
+        assertEquals("User already exists", exception.getMessage());
     }
 }
