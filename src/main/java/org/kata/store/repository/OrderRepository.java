@@ -1,5 +1,7 @@
 package org.kata.store.repository;
 
+import java.util.Optional;
+
 import org.kata.store.domain.Order;
 
 /*
@@ -14,5 +16,5 @@ public interface OrderRepository {
 
     void save(Order order);
 
-    Object findById(String orderId);
+    Optional<Order> findById(String orderId);
 }

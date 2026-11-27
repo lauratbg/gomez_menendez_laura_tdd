@@ -41,7 +41,11 @@ public class OrderService {
     }
 
     public Order advance(String orderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'advanceOrderStatus'");
+       Order order = orderRepository.findById(orderId)
+            .orElseThrow(() -> new IllegalArgumentException("Order not found with id: " + orderId));
+
+        order.move(order);
+        orderRepository.save(order);
+        return order;
     }
 }
