@@ -73,6 +73,22 @@ class OrderTest {
     }
 
     @Test
+    void shouldMoveFromDispatchedToDelivered() {
+		// Arrange
+		String orderId = "ORD-1";
+        String userId = "USR-1";
+        double price = 25.50;
+
+        // Act
+        Order order = new Order(orderId, userId, price);
+        order.setStatus(OrderStatus.DISPATCHED);
+        order.move(order);
+        
+        // Assert
+        assertEquals(OrderStatus.DELIVERED, order.getStatus());
+    }
+
+    @Test
     void shouldNotChangeStatusWhenDelivered() {
 		// Arrange
 		String orderId = "ORD-1";
