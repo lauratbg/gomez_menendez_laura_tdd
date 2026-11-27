@@ -73,6 +73,6 @@ class UserServiceTest {
                 () -> userService.registerUser(duplicatedId, name, surname)
         );
         assertNotNull(exception.getMessage());
-        assertEquals("User already exists", exception.getMessage());
+        assertEquals("User already exists with id: " + duplicatedId, exception.getMessage());
     }
 }
