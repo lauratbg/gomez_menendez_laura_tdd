@@ -3,12 +3,16 @@ package org.kata.store.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.kata.store.domain.Order;
 import org.kata.store.domain.OrderStatus;
 import org.kata.store.domain.User;
@@ -86,4 +90,37 @@ class OrderServiceTest {
         assertNotNull(exception.getMessage());
         assertEquals("User does not exist: " + unknownUserId, exception.getMessage());
     }
+
+    @Test
+    void shouldNotSaveOrderWhenUserDoesNotExist() {
+        // Arrange
+        String orderId = "ORD-1";
+        String unknownUserId = "noname";
+        double price = 25.2;
+        when(userRepository.existsById(unknownUserId)).thenReturn(false);
+
+        // Act & Assert
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> orderService.createOrder(orderId, unknownUserId, price)
+        );
+        verify(orderRepository, never()).save(any());
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {0.0, -0.01, -25.2})
+    void shouldRejectOrderWithInvalidPrice(double invalidPrice) {
+        // Arrange
+        String orderId = "ORD-1";
+        String userId = "87596258P";
+        when(userRepository.existsById(userId)).thenReturn(true);
+
+        // Act & Assert
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> orderService.createOrder(orderId, userId, invalidPrice)
+        );
+        verify(orderRepository, never()).save(any());
+    }
+
 }
